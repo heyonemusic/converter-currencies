@@ -70,8 +70,6 @@ async function getCurrencies() {
     profitGBP.classList.add("red");
     profitGBP.textContent = "- " + negativeProfit.toFixed(1) + " RUB";
   }
-
-  console.log(data)
 }
 
 // Конвертация
