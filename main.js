@@ -32,44 +32,10 @@ async function getCurrencies() {
   elementEUR.textContent = currencies.EUR.toFixed(2);
   elementGBP.textContent = currencies.GBP.toFixed(2);
 
-  // Показ выгоды USD
-  if (data.Valute.USD.Value > data.Valute.USD.Previous) {
-    let positiveProfit = data.Valute.USD.Value - data.Valute.USD.Previous;
-    profitUSD.classList.add("green");
-    profitUSD.classList.remove("red");
-    profitUSD.textContent = "+ " + positiveProfit.toFixed(1) + " RUB";
-  } else {
-    let negativeProfit = data.Valute.USD.Previous - data.Valute.USD.Value;
-    profitUSD.classList.remove("green");
-    profitUSD.classList.add("red");
-    profitUSD.textContent = "- " + negativeProfit.toFixed(1) + " RUB";
-  }
-
-  // Показ выгоды EUR
-  if (data.Valute.EUR.Value > data.Valute.EUR.Previous) {
-    let positiveProfit = data.Valute.GBP.Value - data.Valute.GBP.Previous;
-    profitEUR.classList.add("green");
-    profitEUR.classList.remove("red");
-    profitEUR.textContent = "+ " + positiveProfit.toFixed(1) + " RUB";
-  } else {
-    let negativeProfit = data.Valute.GBP.Previous - data.Valute.GBP.Value;
-    profitEUR.classList.remove("green");
-    profitEUR.classList.add("red");
-    profitEUR.textContent = "- " + negativeProfit.toFixed(1) + " RUB";
-  }
-
-  // Показ выгоды GBP
-  if (data.Valute.GBP.Value > data.Valute.GBP.Previous) {
-    let positiveProfit = data.Valute.GBP.Value - data.Valute.GBP.Previous;
-    profitGBP.classList.add("green");
-    profitGBP.classList.remove("red");
-    profitGBP.textContent = "+ " + positiveProfit.toFixed(1) + " RUB";
-  } else {
-    let negativeProfit = data.Valute.AMD.Previous - data.Valute.AMD.Value;
-    profitGBP.classList.remove("green");
-    profitGBP.classList.add("red");
-    profitGBP.textContent = "- " + negativeProfit.toFixed(1) + " RUB";
-  }
+  // Показ выгоды валют
+  viewProfit(data.Valute.USD.Value, data.Valute.USD.Previous, profitUSD);
+  viewProfit(data.Valute.EUR.Value, data.Valute.EUR.Previous, profitEUR);
+  viewProfit(data.Valute.GBP.Value, data.Valute.GBP.Previous, profitGBP);
 }
 
 // Конвертация
@@ -86,6 +52,21 @@ function conversion() {
       2
     );
   };
+}
+
+// Показ выгоды валют
+function viewProfit(value, prev, valute) {
+  if (value > prev) {
+    let positiveProfit = value - prev;
+    valute.classList.add("green");
+    valute.classList.remove("red");
+    valute.textContent = "+ " + positiveProfit.toFixed(1) + " RUB";
+  } else {
+    let negativeProfit = prev - value;
+    valute.classList.remove("green");
+    valute.classList.add("red");
+    valute.textContent = "- " + negativeProfit.toFixed(1) + " RUB";
+  }
 }
 
 getCurrencies();
