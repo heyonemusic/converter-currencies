@@ -31,7 +31,8 @@ async function getCurrencies() {
   elementUSD.textContent = currencies.USD.toFixed(2);
   elementEUR.textContent = currencies.EUR.toFixed(2);
   elementGBP.textContent = currencies.GBP.toFixed(2);
-
+ 
+  console.log(data)
   // Показ выгоды валют
   viewProfit(data.Valute.USD.Value, data.Valute.USD.Previous, profitUSD);
   viewProfit(data.Valute.EUR.Value, data.Valute.EUR.Previous, profitEUR);
